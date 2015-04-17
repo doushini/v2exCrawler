@@ -4,31 +4,27 @@
 var https = require('https');
 var config = require('./config/config.json');
 var requestHttp = config.http;
+var Topic = require('./models/topic.js');
 
 exports.hotTopics = function () {
-    sendGet( requestHttp.hotTopic, function (data) {
+    httpsGet( requestHttp.hotTopic, function (data) {
         var topicArray = JSON.parse( data );
-        console.log( data );
-        console.log( topicArray );
+        if( topicArray ){
+            topicArray.forEach(function (topic) {
+
+            });
+        }
+    });
+};
+
+var httpsGet = function ( url,callback ) {
+    https.get( url, function (res) {
+        res.on('data', function (d) {
+            callback(d.toString() );
+        });
     } );
 };
 
-var sendGet = function( url,callback ){
-    https.request( url, function (res) {
-        var response = [];
-        var size = 0;
-
-        res.on('data', function (data) {
-            response.push( data );
-            size += data.length;
-        });
-
-        res.on('end', function (data) {
-            response = Buffer.concat( response,size );
-            console.log( response );
-            callback( data );
-        })
-    }).on('error', function (e) {
-        console.log( e );
-    });
+var saveTopic = function ( t ) {
+    new Topic( t).save();
 };

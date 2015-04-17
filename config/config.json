@@ -1,5 +1,9 @@
 {
   "http":{
-    "hotTopic":"https://www.v2ex.com/api/topics/hot.json"
+    "hotTopic":"https://www.v2ex.com/api/topics/hot.json",
+    "jb51":"http://www.jb51.net/article/58526.htm"
+  },
+  "db":{
+    "mongoose":"mongodb://localhost:27017/v2exCrawler"
   }
 }
