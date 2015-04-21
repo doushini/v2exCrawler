@@ -3,10 +3,11 @@
  */
 var config = require('./config/config.json');
 var mongoose = require('mongoose');
-console.log( config.db.mongoose );
-var db = mongoose.createConnection( config.db.mongoose );
+mongoose.connect( config.db.mongoose );
+var db = mongoose.connection;
 
-db.on('error', function (e) {
-    console.log( e );
+db.on('error',console.error.bind(console,'connection error :') );
+db.on('open', function (callback) {
+    console.log("db open ");
 });
 

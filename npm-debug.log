@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\ProgramFiles\\nodejs\\\\node.exe',
+1 verbose cli   'D:\\ProgramFiles\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'responseTime',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node symlink D:\ProgramFiles\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'responseTime', null ]
+7 verbose cache add name=undefined spec="responseTime" args=["responseTime",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'responseTime',
+8 verbose parsed url   path: 'responseTime',
+8 verbose parsed url   href: 'responseTime' }
+9 silly lockFile 2b60663d-responseTime responseTime
+10 verbose lock responseTime C:\Documents and Settings\Administrator\Application Data\npm-cache\2b60663d-responseTime.lock
+11 silly lockFile 2b60663d-responseTime responseTime
+12 silly lockFile 2b60663d-responseTime responseTime
+13 verbose addNamed [ 'responseTime', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile 984fe3b6-responseTime responseTime@
+16 verbose lock responseTime@ C:\Documents and Settings\Administrator\Application Data\npm-cache\984fe3b6-responseTime.lock
+17 silly addNameRange { name: 'responseTime', range: '*', hasData: false }
+18 verbose request where is /responseTime
+19 verbose request registry http://registry.npm.taobao.org/
+20 verbose request id 086e45b1c9f9a6be
+21 verbose url raw /responseTime
+22 verbose url resolving [ 'http://registry.npm.taobao.org/', './responseTime' ]
+23 verbose url resolved http://registry.npm.taobao.org/responseTime
+24 verbose request where is http://registry.npm.taobao.org/responseTime
+25 info trying registry request attempt 1 at 13:58:13
+26 http GET http://registry.npm.taobao.org/responseTime
+27 http 404 http://registry.npm.taobao.org/responseTime
+28 verbose headers { date: 'Tue, 21 Apr 2015 05:58:00 GMT',
+28 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 verbose headers   'content-type': 'application/json',
+28 verbose headers   'cache-control': 'max-age=0',
+28 verbose headers   'content-length': '51',
+28 verbose headers   'accept-ranges': 'bytes',
+28 verbose headers   via: '1.1 varnish',
+28 verbose headers   age: '0',
+28 verbose headers   'x-served-by': 'cache-nrt6126-NRT',
+28 verbose headers   'x-cache': 'MISS',
+28 verbose headers   'x-cache-hits': '0',
+28 verbose headers   'x-timer': 'S1429595879.505085,VS0,VE733',
+28 verbose headers   'keep-alive': 'timeout=10, max=50',
+28 verbose headers   connection: 'Keep-Alive' }
+29 silly registry.get cb [ 404,
+29 silly registry.get   { date: 'Tue, 21 Apr 2015 05:58:00 GMT',
+29 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+29 silly registry.get     'content-type': 'application/json',
+29 silly registry.get     'cache-control': 'max-age=0',
+29 silly registry.get     'content-length': '51',
+29 silly registry.get     'accept-ranges': 'bytes',
+29 silly registry.get     via: '1.1 varnish',
+29 silly registry.get     age: '0',
+29 silly registry.get     'x-served-by': 'cache-nrt6126-NRT',
+29 silly registry.get     'x-cache': 'MISS',
+29 silly registry.get     'x-cache-hits': '0',
+29 silly registry.get     'x-timer': 'S1429595879.505085,VS0,VE733',
+29 silly registry.get     'keep-alive': 'timeout=10, max=50',
+29 silly registry.get     connection: 'Keep-Alive' } ]
+30 silly lockFile 984fe3b6-responseTime responseTime@
+31 silly lockFile 984fe3b6-responseTime responseTime@
+32 error 404 404 Not Found: responseTime
+32 error 404
+32 error 404 'responseTime' is not in the npm registry.
+32 error 404 You should bug the author to publish it
+32 error 404 It was specified as a dependency of 'v2exCrawler'
+32 error 404
+32 error 404 Note that you can also install from a
+32 error 404 tarball, folder, or http url, or git url.
+33 error System Windows_NT 5.1.2600
+34 error command "D:\\ProgramFiles\\nodejs\\\\node.exe" "D:\\ProgramFiles\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "responseTime" "--save"
+35 error cwd D:\workspace\v2exCrawler
+36 error node -v v0.10.32
+37 error npm -v 1.4.28
+38 error code E404
+39 verbose exit [ 1, true ]

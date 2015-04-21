@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 
-var memberSchema = new mongoose.Schema({
+var memberSchema = mongoose.Schema({
     memberId:Number,
     username:String,
     avatar_normal:String

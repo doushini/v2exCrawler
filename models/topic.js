@@ -4,7 +4,8 @@
 var mongoose = require('mongoose');
 var member = require('../models/member');
 
-var topicSchema = new mongoose.Schema({
+
+var topicSchema = mongoose.Schema({
     topicId:Number,
     title:String,
     url:String,
@@ -17,4 +18,4 @@ var topicSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model( 'topic',topicSchema );
+module.exports = mongoose.model( 'Topic',topicSchema );

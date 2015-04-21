@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<form action="/api/topic/create" method="post">
+    title:<br><input name="title" type="text"/><br>
+    content:<br><textarea name="content"></textarea><br>
+    <input name="submit" type="submit" value="发表"/>
+</form>
+</body>
+</html>
