@@ -13,7 +13,6 @@ exports.create = function (req, res) {
 exports.save = function (req, res) {
     var title = req.body.title;
     var content = req.body.content;
-
 };
 
 exports.getAll = function (req, res) {
@@ -22,7 +21,7 @@ exports.getAll = function (req, res) {
     Topic.find().sort({"createDate":-1}).skip(perPage * page).limit(perPage)
         .exec(function (error, topics) {
             if(error){
-                return utils.response(res,500,error);
+                throw new ServiceException(error.message,this);
             }
 
             Topic.count(function (err, count) {
@@ -32,15 +31,4 @@ exports.getAll = function (req, res) {
                 return utils.response(res,200,{"topics":topics,"count":count});
             });
         });
-};
-
-var scheduleCraw;
-exports.beginCrawApi = function (req, res) {
-    scheduleCraw = setInterval(crawler.hotTopics,10000);
-    return utils.response(res,200,"craw ing ...");
-};
-
-exports.endCrawApi = function (req, res) {
-    clearInterval(scheduleCraw);
-    return utils.response(res,200,"craw end ...");
 };

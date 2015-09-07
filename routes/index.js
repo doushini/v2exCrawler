@@ -17,7 +17,8 @@ router
     .get('/reg',userController.reg)
     .post('/login',userController.session)
     .post('/users/create',userController.create)
-    .get('/topics/create',topicController.create);
+    .get('/topics/create',topicController.create)
+    .get('/',topicController.getAll);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
