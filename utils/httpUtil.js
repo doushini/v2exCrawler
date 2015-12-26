@@ -4,15 +4,9 @@
 var request = require('request');
 var CrawException = require("../utils/crawException");
 
-function HttpUtil(){
-
-}
-
-HttpUtil.prototype.get = function (url, callback) {
+exports.req = function (url, callback) {
     request(url, function (err, response, body) {
-        if(err){
-            throw new CrawException("request error :",err);
-        }
+        if(err)throw new CrawException("request error :",err);
         var status = response.statusCode;
         if(status!=200){
             throw new CrawException("request code :"+status);
@@ -20,5 +14,3 @@ HttpUtil.prototype.get = function (url, callback) {
         callback(body);
     });
 };
-
-module.exports = new HttpUtil();

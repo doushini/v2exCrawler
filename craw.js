@@ -1,46 +1,96 @@
 /**
- * Created by luohui on 15/9/7.
+ * Created by luohui on 15/10/1.
  */
-var CrawException = require("./utils/crawException");
-var fs = require('fs');
-var Spider = require('./spider.js');
-var logger = require('log4js').getLogger();
+var async = require('async'),
+    fs = require('fs'),
+    url = require('./config/config').url,
+    httpUtil = require('./utils/httpUtil'),
+    cheerio = require('cheerio'),
+    Topic = require('./models/topic'),
+    Member = require('./models/member'),
+    page = 0,
+    path = require('path').join(__dirname,'config/data.json');
+    require('./mongoose.js');
 
-var pageNo = null;
-if( pageNo===null ){
-    pageNo = queryLastPage();
-    if(pageNo!==null){
-        setInterval(execute,1000);
-    }
-}
+var readLastPage = function (callback) {
+    fs.readFile(path, function (err, data) {
+        if (err)return callback(err);
+        page = parseInt(data.toString());
+        callback(null);
+    });
+};
 
-function queryLastPage(){
-    var num = null;
-    var content = fs.readFileSync('./config/data','utf-8');
-    if(content){
-        num = parseInt(content);
-    }
-    return num;
-}
+var sendRequest = function (callback) {
+    var localUrl = url + page;
+    console.log("localUrl: " + localUrl);
+    httpUtil.req(localUrl, function (body) {
+        callback(null, body);
+    })
+};
 
-function writeLastPage() {
-    fs.writeFileSync('./config/data',pageNo);
-}
+var parseBody = function (body, callback) {
+    var $ = cheerio.load(body);
+    var members = [], topics = [];
+    $("#TopicsNode .cell").each(function (i, elem) {
+        $ = cheerio.load($(this).html());
+        var title = $(".item_title").text();
+        var url = $(".item_title a").attr('href');
+        var author = $(".small.fade a").text();
+        var avatar = $("img").attr('src');
 
-function execute(){
-    try{
-        crawPage(function (e) {
-            if(e){
-                throw new CrawException();
-            }
-            writeLastPage();
+        var member = new Member({
+            username: author,
+            avatar: avatar
         });
-    }catch(err){
-        console.log("craw page "+ pageNo + " happened " + err.msg);
-    }
-}
 
+        var topic = new Topic({
+            title: title,
+            url: url,
+            member: member
+        });
 
-function crawPage() {
-    new Spider().setPage(++pageNo).go();
-}
+        members.push(member);
+        topics.push(topic);
+    });
+    callback(null,members, topics);
+};
+
+var saveMembers = function (members, topics, callack) {
+    async.each(members, function (item, cb) {
+        item.save(function (e) {
+            cb(e);
+        });
+    }, function (err) {
+        callack(err, topics);
+    })
+};
+
+var saveTopics = function (topics, callack) {
+    async.each(topics, function (item, cb) {
+        item.save(function (e) {
+            cb(e);
+        });
+    }, function (err) {
+        callack(err);
+    })
+};
+
+var writeLastPage = function (callback) {
+    fs.writeFile(path,++page, function (err) {
+        callback(err);
+    })
+};
+
+var craw = function () {
+    async.waterfall([readLastPage, sendRequest, parseBody, saveMembers, saveTopics, writeLastPage], function (err, result) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("over page :"+page);
+        setTimeout(craw,1000*60);
+    });
+};
+
+exports.begin = function () {
+    craw();
+};

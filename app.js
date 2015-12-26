@@ -1,6 +1,5 @@
 var express = require('express');
-require('./mongoose.js');
-require('./craw.js');
+require('./craw.js').begin();
 var app = express();
-require('./config/express')(app,express);
+require('./express')(app,express);
 module.exports = app;

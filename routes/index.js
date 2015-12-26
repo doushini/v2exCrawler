@@ -7,9 +7,9 @@ var Auth = require('../middleware/authorization');
 //api router
 router
     .all('/api/*',Auth.hasLogin)
-    .get('/api/topic',topicController.getAll)
-    .get('/api/beginCrawApi',topicController.beginCrawApi)
-    .get('/api/endCrawApi',topicController.endCrawApi)
+    .get('/api/topic',topicController.index)
+    //.get('/api/beginCrawApi',topicController.beginCrawApi)
+    //.get('/api/endCrawApi',topicController.endCrawApi)
     .post('/api/topic/create',topicController.save);
 //front router
 router
@@ -18,11 +18,6 @@ router
     .post('/login',userController.session)
     .post('/users/create',userController.create)
     .get('/topics/create',topicController.create)
-    .get('/',topicController.getAll);
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+    .get('/',topicController.index);
 
 module.exports = router;

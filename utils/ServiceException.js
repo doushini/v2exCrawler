@@ -4,10 +4,9 @@
 module.exports={};
 
 function ServiceException(msg,clazz){
-    Error.captureStackTrace(this);
     this.message = msg || "crawler exception";
     this.name = clazz;
-};
+}
 
 ServiceException.prototype = new Error();
 ServiceException.prototype.constructor = ServiceException;
